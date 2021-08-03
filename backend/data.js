@@ -1,9 +1,24 @@
+import bcrypt from 'bcryptjs';
+
 const data = {
+    users: [
+        {
+            name: 'Erez',
+            email: 'admin@example.com',
+            password: bcrypt.hashSync('1234', 8),
+            isAdmin: true
+        },
+        {
+            name: 'Jakob',
+            email: 'user@example.com',
+            password: bcrypt.hashSync('1234', 8),
+            isAdmin: false
+        }
+    ],
     products: [
         {
-            _id: '1',
             name: 'Nike Slim Shirt',
-            Category: 'Shirts',
+            category: 'Shirts',
             image: '/images/p1.jpeg',
             price: 120,
             countInStock: 3,
@@ -13,9 +28,8 @@ const data = {
             description: 'high quality product'
         },
         {
-            _id: '2',
             name: 'Adidas Fit Shirt',
-            Category: 'Shirts',
+            category: 'Shirts',
             image: '/images/p2.jpeg',
             price: 100,
             countInStock: 32,
@@ -25,9 +39,8 @@ const data = {
             description: 'high quality product'
         },
         {
-            _id: '3',
             name: 'Lacoste Free Shirt',
-            Category: 'Shirts',
+            category: 'Shirts',
             image: '/images/p3.jpeg',
             price: 220,
             countInStock: 10,
@@ -37,9 +50,8 @@ const data = {
             description: 'high quality product'
         },
         {
-            _id: '4',
             name: 'Nike Slim Pant',
-            Category: 'Pants',
+            category: 'Pants',
             image: '/images/p4.jpeg',
             price: 78,
             countInStock: 0,
@@ -49,9 +61,8 @@ const data = {
             description: 'high quality product'
         },
         {
-            _id: '5',
             name: 'Puma Slim Pant',
-            Category: 'Pants',
+            category: 'Pants',
             image: '/images/p5.jpeg',
             price: 65,
             countInStock: 3,
@@ -61,9 +72,8 @@ const data = {
             description: 'high quality product'
         },
         {
-            _id: '6',
             name: 'Adidas Fit Pant',
-            Category: 'Pants',
+            category: 'Pants',
             image: '/images/p6.jpeg',
             price: 139,
             countInStock: 12,
