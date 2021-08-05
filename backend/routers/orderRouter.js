@@ -9,7 +9,7 @@ orderRouter.post('/', isAuth,  // is Auth is a middleware
     expressAsyncHandler(async(req, res) => {
         if (req.body.orderItems.length === 0) {
             // client error
-            res.status(400).send({ message: 'Cert is empty' });
+            res.status(400).send({ message: 'Cart is empty' });
         } else {
             //the order is correct
             const order = new Order({

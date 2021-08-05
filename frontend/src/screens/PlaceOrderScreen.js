@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrder } from '../actions/orderActions';
 import { ORDER_CREATE_RESET } from '../constants/orderConstants';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 function PlaceOrderScreen(props) {
     const cart = useSelector(state => state.cart);
@@ -29,7 +31,7 @@ function PlaceOrderScreen(props) {
             props.history.push(`/order/${order._id}`);
             dispatch({ type: ORDER_CREATE_RESET })
         }
-    }, [success, props.history, order._id, dispatch ])
+    }, [success, props.history, order, dispatch ])
 
     return (
         <div>
@@ -109,6 +111,8 @@ function PlaceOrderScreen(props) {
                                     Place Order
                                 </button>
                             </li>
+                            {loading && <LoadingBox></LoadingBox>}
+                            {error && <MessageBox variant="danger">{error}</MessageBox>}
                         </ul>
                     </div>
                 </div>
