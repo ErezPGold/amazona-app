@@ -1,7 +1,12 @@
 import { compose, applyMiddleware, createStore, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { cartReducer } from './reducers/cartReducers';
-import { orderCreateReducer, orderDetailsReducer, orderPayReducer } from './reducers/orderReducers';
+import { 
+    orderCreateReducer, 
+    orderDetailsReducer, 
+    orderMineListReducer, 
+    orderPayReducer 
+} from './reducers/orderReducers';
 // import data from "./data";
 import { 
     productListReducer, 
@@ -39,7 +44,8 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
-    orderPay: orderPayReducer
+    orderPay: orderPayReducer,
+    orderMineList: orderMineListReducer
 })
 
 // in order to see in redux devtools in chrome we need to add this:
