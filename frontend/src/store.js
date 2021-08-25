@@ -12,7 +12,7 @@ import {
     productListReducer, 
     productDetailsReducer 
 } from './reducers/productReducer';
-import { userRegisterReducer, userSigninReducer } from './reducers/userReducer';
+import { userDetailsReducer, userRegisterReducer, userSigninReducer } from './reducers/userReducer';
 
 // define initial state
 const initialState = {
@@ -45,7 +45,8 @@ const reducer = combineReducers({
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
-    orderMineList: orderMineListReducer
+    orderMineList: orderMineListReducer,
+    userDetails: userDetailsReducer
 })
 
 // in order to see in redux devtools in chrome we need to add this:

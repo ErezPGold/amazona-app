@@ -195,3 +195,6 @@ Create Rating and Product components
     3. show orders in profile screen
     4. style orders
     
+33. Display User Profile
+    1. create user details api
+    2. show user information
