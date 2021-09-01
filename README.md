@@ -207,3 +207,8 @@ Create Rating and Product components
     1. Create Admin Menu
     2. Create Admin Middleware in Backend
     3. Create Admin Route in Frontend
+
+36. List Products
+    1. Create Product List Screen
+    2. Add reducer to store
+    3. show products on the screen
