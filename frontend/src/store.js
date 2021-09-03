@@ -10,7 +10,8 @@ import {
 // import data from "./data";
 import { 
     productListReducer, 
-    productDetailsReducer 
+    productDetailsReducer, 
+    productCreateReducer
 } from './reducers/productReducer';
 import { userDetailsReducer, userRegisterReducer, userSigninReducer, userUpdateProfileReducer } from './reducers/userReducer';
 
@@ -47,7 +48,8 @@ const reducer = combineReducers({
     orderPay: orderPayReducer,
     orderMineList: orderMineListReducer,
     userDetails: userDetailsReducer,
-    userUpdateProfile: userUpdateProfileReducer
+    userUpdateProfile: userUpdateProfileReducer,
+    productCreate: productCreateReducer
 })
 
 // in order to see in redux devtools in chrome we need to add this:
