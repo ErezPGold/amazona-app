@@ -218,3 +218,10 @@ Create Rating and Product components
     2. build Create Product button
     3. define product create constant, action and reducer
     4. use action in Product List Screen
+
+38. Build Product Edit Screen
+    1. create edit screen
+    1. define state
+    2. create fields
+    3. load product details
+    4. add to routes
