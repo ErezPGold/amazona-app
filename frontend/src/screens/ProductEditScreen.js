@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Axios from 'axios';
 import { detailsProduct, updateProduct } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -51,6 +52,32 @@ function ProductEditScreen(props) {
             name, price, image, category, brand, countInStock, description
         }));
     }
+    const [loadingUpload, setLoadingUpload] = useState(false);
+    const [errorUpload, setErrorUpload] = useState('');
+
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
+
+    const uploadFileHandler = async (e) => {
+        const file = e.target.files[0];
+        const bodyFormData = new FormData(); // helps with upload file with axaj req
+        bodyFormData.append('image', file);
+        setLoadingUpload(true);
+        try {
+            const { data } = await Axios.post('/api/uploads', bodyFormData, {
+                headers: {
+                    'Content-type': 'multipart/form-data', // the backend will understand the file
+                    Authorization: `Bearer ${userInfo.token}`
+                }
+            });
+            setImage(data);
+            setLoadingUpload(false);
+        } catch (error) {
+            setErrorUpload(error.message);
+            setLoadingUpload(false);
+        }
+    }
+
     return (
         <div>
             <form className="form" onSubmit={submitHandler}>
@@ -81,6 +108,14 @@ function ProductEditScreen(props) {
                      <input id="image" type="text" placeholder="Enter image"
                         value={image} onChange={(e) => setImage(e.target.value)}
                      />
+                 </div>
+                 <div>
+                     <label htmlFor="imageFile">Image File</label>
+                     <input id="imageFile" type="file" label="Choose Image"
+                        onChange={uploadFileHandler}
+                     />
+                     {loadingUpload && <LoadingBox></LoadingBox>}
+                     {errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox>}
                  </div>
                  <div>
                      <label htmlFor="category">Category</label>
