@@ -1,9 +1,20 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
-import { isAuth } from '../utils.js';
+import { isAdmin, isAuth } from '../utils.js';
 
 const orderRouter = express.Router();
+
+orderRouter.get('/', isAuth, isAdmin, 
+    expressAsyncHandler(async (req, res) => {
+        const orders = await Order.find({}).populate('user', 'name'); // Admin get all orders, 
+                                                // from the collection user get only the name
+        // populate give only the name from user ObjectId (in Order:
+        // user: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},)
+        // it is lie join in SQL
+        res.send(orders);
+    })
+);
 
 orderRouter.get('/mine', isAuth,
 expressAsyncHandler(async (req, res) => {
