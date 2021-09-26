@@ -28,6 +28,7 @@ $ cd amazona
   - Create database at [https://cloud.mongodb.com](https://cloud.mongodb.com)
   - Create .env file in root folder
   - Set MONGODB_URL=MONGODB_URL=mongodb+srv://your-db-connection
+  - Set MONGODB_URL=mongodb+srv://your-db-connection
 
 ### 3. Run Backend
 
@@ -304,3 +305,7 @@ Create Rating and Product components
     2. create Order List Screen
     3. Add reducer to store
     4. show products on the screen
+
+43. Delete Order
+    2. create delete order action and reducer
+    3. add order delete action to order list
