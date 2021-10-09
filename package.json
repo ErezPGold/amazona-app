@@ -19,6 +19,7 @@
     "nodemon": "^2.0.9"
   },
   "scripts": {
+    "build": "cd frontend && npm install && npm run build",
     "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
   },
   "repository": {
@@ -30,5 +31,9 @@
   "bugs": {
     "url": "https://github.com/ErezPGold/amazona-app/issues"
   },
-  "homepage": "https://github.com/ErezPGold/amazona-app#readme"
+  "homepage": "https://github.com/ErezPGold/amazona-app#readme",
+  "engines": {
+    "node": "13.14.0",
+    "npm": "6.14.0"
+  }
 }
