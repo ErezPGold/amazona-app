@@ -325,3 +325,8 @@ Create Rating and Product components
     12. Create mongodb atlas database
     19. Set database connection in heroku env variables
     20. Commit and push
+
+46. List Users
+    1. build api for list users
+    2. Create UserList Screen
+    3. create order details constant, action and reducer
