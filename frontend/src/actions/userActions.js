@@ -1,5 +1,8 @@
 import Axios from "axios";
 import { 
+    USER_DELETE_FAIL,
+    USER_DELETE_REQUEST,
+    USER_DELETE_SUCCESS,
     USER_DETAILS_FAIL,
     USER_DETAILS_REQUEST,
     USER_DETAILS_SUCCESS,
@@ -121,14 +124,12 @@ export const listUsers = () => async (dispatch, getState) => {
     dispatch({ type: USER_LIST_REQUEST });
     
     try {
-        const {userSignin: { userInfo }} = getState(); 
-        console.log(userInfo)
+        const {userSignin: { userInfo }} = getState();         
         const { data } = await Axios.get('/api/users', {
             headers: {
                 Authorization: `Bearer ${userInfo.token }`
             }
-        });
-        console.log(data)
+        });        
         dispatch({
             type: USER_LIST_SUCCESS,
             payload: data
@@ -138,5 +139,23 @@ export const listUsers = () => async (dispatch, getState) => {
         ? error.response.data.message 
         : error.message;
         dispatch({type: USER_LIST_FAIL, payload: message});
+    }
+}
+
+export const deleteUser = (userId) => async(dispatch, getState) => {
+    dispatch({ type: USER_DELETE_REQUEST, payload: userId });
+    const {userSignin: { userInfo }} = getState(); 
+    try {
+        const { data } = await Axios.delete(`/api/users/${userId}`, {
+            headers: {
+                Authorization: `Bearer ${userInfo.token }`
+            }
+        })
+        dispatch({ type: USER_DELETE_SUCCESS, payload: data })
+    } catch (error) {
+        const message = error.response && error.response.data.message 
+        ? error.response.data.message 
+        : error.message;
+        dispatch({type: USER_DELETE_FAIL, payload: message});
     }
 }
