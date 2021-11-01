@@ -1,13 +1,16 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
-import { isAdmin, isAuth } from '../utils.js';
+import { isAdmin, isAuth, isSellerOrAdmin } from '../utils.js';
 
 const orderRouter = express.Router();
 
-orderRouter.get('/', isAuth, isAdmin, 
+orderRouter.get('/', isAuth, isSellerOrAdmin, 
     expressAsyncHandler(async (req, res) => {
-        const orders = await Order.find({}).populate('user', 'name'); // Admin get all orders, 
+        const seller = req.query.seller || '';
+        const sellerFilter = seller ? { seller } : {};
+
+        const orders = await Order.find({...sellerFilter}).populate('user', 'name'); // Admin get all orders, 
                                                 // from the collection user get only the name
         // populate give only the name from user ObjectId (in Order:
         // user: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},)
@@ -30,6 +33,7 @@ orderRouter.post('/', isAuth,  // is Auth is a middleware
         } else {
             //the order is correct
             const order = new Order({
+                seller: req.body.orderItems[0].seller,
                 orderItems: req.body.orderItems,
                 shippingAddress: req.body.shippingAddress,
                 paymentMethod: req.body.paymentMethod,
