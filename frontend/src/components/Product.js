@@ -16,8 +16,17 @@ function Product({product}) {
                     rating={product.rating}
                     numReviews={product.numReviews}
                 />
-                <div className="price">
-                    ${product.price}
+                <div className="row">
+                    <div className="price">
+                        ${product.price}
+                    </div>
+                    <div>
+                        <Link to={`/seller/${product.seller._id}`}>
+                            {/* this productSchema seller is the user, and inside the userModel
+                             - the seller name. */}
+                            {product.seller.seller.name}  
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>
