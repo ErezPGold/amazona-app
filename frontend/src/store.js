@@ -16,7 +16,8 @@ import {
     productDetailsReducer, 
     productCreateReducer,
     productUpdateReducer,
-    productDeleteReducer
+    productDeleteReducer,
+    productCategoryListReducer
 } from './reducers/productReducer';
 import { 
     userDeleteReducer,
@@ -72,7 +73,8 @@ const reducer = combineReducers({
     orderDeliver: orderDeliverReducer,
     userList: userListReducer,
     userDelete: userDeleteReducer,
-    userTopSellerList: userTopSellerListReducer
+    userTopSellerList: userTopSellerListReducer,
+    productCategoryList: productCategoryListReducer
 })
 
 // in order to see in redux devtools in chrome we need to add this:
