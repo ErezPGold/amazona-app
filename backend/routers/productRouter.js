@@ -136,7 +136,9 @@ productRouter.post('/:id/reviews', isAuth,
             };
             product.reviews.push(review);
             product.numReviews = product.reviews.length;
-            product.rating = product.reviews.reduce((a, c) => c.rating + a, 0) / product.reviews.length;
+            product.rating = 
+                product.reviews.reduce((a, c) => c.rating + a, 0) 
+                / product.reviews.length;
             const updatedProduct = await product.save();
             // status 201 means we created a new resourse
             res

@@ -35,6 +35,10 @@ app.get('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID_LIVE || 'sb'); // sb means sandbox
 });
 
+app.get('/api/config/google', (req, res) => {
+    res.send(process.env.GOOGLE_API_KEY || '');
+});
+
 // Display The images from /uploads :
 const __dirname = path.resolve(); // return the current folder
 app.use('/uploads', express.static(path.join(__dirname, '/uploads'))); // point to the /uploads folder

@@ -28,6 +28,7 @@ import SearchScreen from './screens/SearchScreen';
 import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
+import MapScreen from './screens/MapScreen';
 
 function App() {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -172,6 +173,7 @@ function App() {
               <Route path='/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order' 
                 component={SearchScreen} exact />
               <PrivateRoute path='/profile' component={ProfileScreen} />
+              <PrivateRoute path='/map' component={MapScreen} />
               <AdminRoute path='/productlist' component={ProductListScreen} exact />
               <AdminRoute path='/orderlist' component={OrderListScreen} exact />
               <AdminRoute path='/userlist' component={UserListScreen} />
