@@ -83,9 +83,10 @@ export const detailsUser = (userId) => async (dispatch,getState) => {
     });
     const {userSignin: { userInfo }} = getState();
     try {
+        // user not loged in trying to enter the seller page - won't get any error.
         const { data } = await Axios.get(`/api/users/${userId}`, {
             headers: {
-                Authorization: `Bearer ${userInfo.token }`
+                Authorization: `Bearer ${userInfo?.token}`
             }
         });
         dispatch({
