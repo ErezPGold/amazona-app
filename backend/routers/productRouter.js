@@ -9,6 +9,8 @@ const productRouter = express.Router();
 
 productRouter.get('/', 
     expressAsyncHandler( async(req, res) => {
+        const pageSize = 3;
+        const page = Number(req.query.pageNumber) || 1; // || is an option if it doesn't exist
         const name = req.query.name || '';
         const category = req.query.category || '';
         const seller = req.query.seller || '';
@@ -29,6 +31,13 @@ productRouter.get('/',
             order === 'toprated' ? { rating: -1 } :
             { _id: -1 }
 
+        const count = await Product.countDocuments({ // returns number of matching docs in the db
+            ...sellerFilter, 
+            ...nameFilter,
+            ...categoryFilter,
+            ...priceFilter,
+            ...ratingFilter
+        });
         const products = await Product.find({
             ...sellerFilter, 
             ...nameFilter,
@@ -38,8 +47,10 @@ productRouter.get('/',
         }).populate(
             'seller', 
             'seller.name seller.logo'
-        ).sort(sortOrder);
-        res.send(products);
+        ).sort(sortOrder)
+        .skip(pageSize * (page - 1))
+        .limit(pageSize); // we will get results only as the limit permits
+        res.send({ products, page, pages: Math.ceil(count / pageSize)});
     })
 );
 
